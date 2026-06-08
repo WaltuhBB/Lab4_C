@@ -58,10 +58,19 @@ int compress(char* file_in, char* file_out)
 
                 if (res == 0 && bytes_read == 8)
                 {
+                    unsigned char mask = 1 << 6;
+                    
                     //записываем по 7 байт
                     for (size_t i = 0; i < 7; i++)
                     {
+                        if (mask & buffer[7])
+                        {
+                            buffer[i] = buffer[i] | (1 << 7);
+                        }
+                        
                         fprintf(ptr_out, "%c", buffer[i]);
+                        
+                        mask = mask >> 1;
                     }
                 }
             }
