@@ -25,6 +25,7 @@ int compress(char* file_in, char* file_out)
             size_t bytes_total = 0;
 
             int check_scanf = 1;
+            int check_printf = 1;
 
             res = 0;
 
@@ -67,8 +68,12 @@ int compress(char* file_in, char* file_out)
                         {
                             buffer[i] = buffer[i] | (1 << 7);
                         }
-                        
-                        fprintf(ptr_out, "%c", buffer[i]);
+
+                        if (fprintf(ptr_out, "%c", buffer[i]) != 1)
+                        {
+                            res = 3;
+                            i = 8;
+                        }
                         
                         mask = mask >> 1;
                     }
@@ -80,7 +85,11 @@ int compress(char* file_in, char* file_out)
             {
                 for (size_t i = 0; i < bytes_read; i++)
                 {
-                    fprintf(ptr_out, "%c", buffer[i]);
+                    if (fprintf(ptr_out, "%c", buffer[i]) != 1)
+                    {
+                        res = 3;
+                        i = 8;
+                    }
                 }    
             }
 
