@@ -206,6 +206,16 @@ int main()
     char file_in[20] = "test.txt";
     char file_out[20] = "res.txt";
 
+    //FILE *ptr_tst = fopen(file_in, "wb");
+
+    //all ASCII test
+    //for (unsigned char i = 0; i < 128; i++)
+    //{
+        //fprintf(ptr_tst, "%c", i);
+    //}
+
+    //fclose(ptr_tst);
+
     //compress(file_in, file_out);
     decompress(file_out, file_in);
 
